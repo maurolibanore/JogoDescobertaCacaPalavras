@@ -2,11 +2,16 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Descoberta {
-    public static void main(String[] args) {
+    private Scanner scanner;
+    private Random random;
+    public String[] palavras;
+    private String palavraEscolhida;
+    private int contador; {
+
+
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        String[] palavras = {"agua", "pao", "mauro"};
         int contador = 0;
 
         String palavraEscolhida = escolherPalavra(random, palavras);

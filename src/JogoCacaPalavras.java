@@ -2,26 +2,25 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class JogoCacaPalavras {
+    private String[] palavras;
+    private int tamanho = 10;
+    private char[][] tabuleiro;
+    private Random random;
+    private Scanner scanner;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random(); // PRIMEIRO Random - Classe - random - objeto - Random() Construtor
+    // Construtor
+    public JogoCacaPalavras(String[] palavras) {
+        this.palavras = palavras;
+        this.tabuleiro = new char[tamanho][tamanho];
+        this.random = new Random();
+        this.scanner = new Scanner(System.in);
+    }
 
-        String palavras[] = {"agua", "mauro", "frank"};          // VETOR PALAVRAS
-        int tamanho = 10;
-        char tabuleiro[][] = new char[tamanho][tamanho];    // CRIEI UMA MATRIZ
-
-        // Seleciona uma palavra aleatória
+    public void iniciar() {
         String palavraSelecionada = selecionarPalavra(palavras);
-        // System.out.println("Palavra selecionada: " + palavraSelecionada); // MOSTRAR A PALAVRA
-
-
         preencherTabuleiro(tabuleiro, tamanho);
-
-        colocarPalavra(tabuleiro,tamanho,palavraSelecionada);
-
+        colocarPalavra(tabuleiro, tamanho, palavraSelecionada);
         imprimirTabuleiro(tabuleiro, tamanho);
-
         verificarPalavra(palavraSelecionada);
     }
 
