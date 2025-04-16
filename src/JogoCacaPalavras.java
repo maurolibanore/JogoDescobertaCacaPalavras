@@ -17,23 +17,25 @@ public class JogoCacaPalavras {
     }
 
     public void iniciar() {
-        String palavraSelecionada = selecionarPalavra(palavras, palavras);
-        preencherTabuleiro(tabuleiro, tamanho);
+        String palavraSelecionada = selecionarPalavra(palavras);
         colocarPalavra(tabuleiro, tamanho, palavraSelecionada);
+        preencherTabuleiro(tabuleiro, tamanho);
         imprimirTabuleiro(tabuleiro, tamanho);
         verificarPalavra(palavraSelecionada);
     }
 
-    private static String selecionarPalavra(String vetor[], String vetor2[]) {
+    private static String selecionarPalavra(String vetor[]) {
         return  vetor[new Random().nextInt(vetor.length)];
     }
 
 
     private static void preencherTabuleiro(char tabuleiro[][], int tamanho) {
         Random random = new Random();
-        for (int x = 0; x < tamanho; x++) {        // PADRAO DO LACO DE REPETICAO
-            for (int y = 0; y < tamanho; y++) {       // DOIS LAÇOS - UM PARA A LINHA OUTRO COLUNA POIS E UMA MATRIZ
-                tabuleiro[x][y] = (char) ('a' + random.nextInt(25));     // faz os SORTEIOS PELA TABELA ASCII de 0 ate 25 a partir do 'a'
+        for (int x = 0; x < tamanho; x++) {
+            for (int y = 0; y < tamanho; y++) {
+                if (tabuleiro[x][y] == 0) { // Só preenche se estiver vazio
+                    tabuleiro[x][y] = (char) ('a' + random.nextInt(26)); // letras de a até z da tabela ASSCI
+                }
             }
         }
     }
