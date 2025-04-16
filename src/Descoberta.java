@@ -1,24 +1,27 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class Descoberta {
+public class Descoberta{
     private Scanner scanner;
     private Random random;
     public String[] palavras;
     private String palavraEscolhida;
-    private int contador; {
+    private int contador;
+    private String palavraEmbaralhada;
 
+    public Descoberta(String[] palavras) {
+        this.contador = 0;
+        this.scanner = new Scanner(System.in); // Inicializa o Scanner
+        this.random = new Random(); // Inicializa o Random
 
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
+        this.palavraEscolhida = escolherPalavra(random, palavras); // Escolhe a palavra
+        this.palavraEmbaralhada = embaralharPalavra(palavraEscolhida, random); // Agora pode embaralhar!
+    }
 
-        int contador = 0;
-
-        String palavraEscolhida = escolherPalavra(random, palavras);
-        String palavraEmbaralhada = embaralharPalavra(palavraEscolhida, random);
-
+    public void iniciar(){
         System.out.println("Palavra embaralhada: " + palavraEmbaralhada);
         String opcao = lerPalavra(scanner);
+
 
         // Enquanto não acertar
         while (!opcao.equals(palavraEscolhida)) {
@@ -36,7 +39,6 @@ public class Descoberta {
                 System.out.println("Opção inválida. Digite 1 ou 2.");
             }
         }
-
         System.out.println("ACERTOU!");
         System.out.println("Quantidade de erros: " + contador);
     }
