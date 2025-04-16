@@ -9,6 +9,7 @@ public class Descoberta{
     private int contador;
     private String palavraEmbaralhada;
 
+    // Construtor
     public Descoberta(String[] palavras) {
         this.contador = 0;
         this.scanner = new Scanner(System.in); // Inicializa o Scanner

@@ -18,11 +18,11 @@ public class Main {
 
         // Chama o jogo correspondente
         if (opcao == 1) {
-            Descoberta jogo1 = new Descoberta(palavras);
-            jogo1.iniciar();
+            Descoberta descoberta = new Descoberta(palavras);
+            descoberta.iniciar();
         } else {
-            JogoCacaPalavras jogo2 = new JogoCacaPalavras(palavras, 10);
-            jogo2.iniciar();
+            JogoCacaPalavras cacaPalavras = new JogoCacaPalavras(palavras, 10);
+            cacaPalavras.iniciar();
         }
     }
 }

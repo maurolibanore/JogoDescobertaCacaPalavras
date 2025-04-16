@@ -44,8 +44,8 @@ public class JogoCacaPalavras {
         Random random = new Random();
         boolean colocada = false;
         while (!colocada) {
-            // 0 = horizontal, 1 = vertical, 2 = diagonal
-            int direcao = random.nextInt(3);
+
+            int direcao = random.nextInt(3);// 0 = horizontal, 1 = vertical, 2 = diagonal
 
             int linha = 0;
             int coluna = 0;
@@ -65,44 +65,40 @@ public class JogoCacaPalavras {
             boolean podeColocar = true;
 
             for (int i = 0; i < palavraSelecionada.length(); i++) {
+                int l = linha;
+                int c = coluna;
 
-                // Calcula a linha onde a letra será posicionada, com base na direção:
-                // direção 1 (vertical) ou 2 (diagonal) -> soma i à linha
-                int r = linha + (direcao == 1 || direcao == 2 ? i : 0);
-
-                // Calcula a coluna onde a letra será posicionada, com base na direção:
-                // direção 0 (horizontal) ou 2 (diagonal) -> soma i à coluna
-                int c = coluna + (direcao == 0 || direcao == 2 ? i : 0);
+                if (direcao == 0) { // horizontal
+                    c += i;
+                } else if (direcao == 1) { // vertical
+                    l += i;
+                } else if (direcao == 2) { // diagonal
+                    l += i;
+                    c += i;
+                }
 
                 // Verifica se o espaço já está ocupado por outra letra diferente
                 // Se estiver ocupado com uma letra diferente, não pode colocar a palavra aqui
-                if (tabuleiro[r][c] != 0 && tabuleiro[r][c] != palavraSelecionada.charAt(i)) {
-                    podeColocar = false; // Marca que não pode colocar
-                    break;               // Sai do laço, não precisa mais verificar o restante
+                if (tabuleiro[l][c] != 0 && tabuleiro[l][c] != palavraSelecionada.charAt(i)) {
+                    podeColocar = false;
+                    break;
                 }
             }
 
             if (podeColocar) {
                 // Laço novamente para realmente colocar as letras da palavra no tabuleiro
                 for (int i = 0; i < palavraSelecionada.length(); i++) {
-
-                    // Calcula a linha onde a letra será posicionada
-                    int r = linha + (direcao == 1 || direcao == 2 ? i : 0);
-
-                    // Calcula a coluna onde a letra será posicionada
-                    int c = coluna + (direcao == 0 || direcao == 2 ? i : 0);
-
-                    // Coloca a letra da palavra no tabuleiro na posição calculada
-                    tabuleiro[r][c] = palavraSelecionada.charAt(i);
+                    int l = linha + (direcao == 1 || direcao == 2 ? i : 0);// Calcula a linha onde a letra será posicionada
+                    int c = coluna + (direcao == 0 || direcao == 2 ? i : 0);// Calcula a coluna onde a letra será posicionada
+                    tabuleiro[l][c] = palavraSelecionada.charAt(i);// Coloca a letra da palavra no tabuleiro na posição calculada
                 }
-
-                // Marca que a palavra foi colocada com sucesso, para encerrar o loop externo
                 colocada = true;
             }
         }
     }
 
     private static void imprimirTabuleiro(char tabuleiro[][], int tamanho) {  // cria uma classe privada para melhor organizacao
+        System.out.println("==== CAÇA PALAVRAS ====");
         for (int x = 0; x < tamanho; x++) {
             for (int y = 0; y < tamanho; y++) {
                 System.out.print(tabuleiro[x][y] + " ");
