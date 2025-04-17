@@ -7,11 +7,12 @@ public class Main {
         // Vetor com palavras que podem ser usadas nos jogos
         String[] palavras = {"agua", "peixe", "mauro", "frank"};
 
+
         // Exibe o menu de escolha do jogo
-        System.out.println("Escolha o jogo:");
-        System.out.println("1 - Jogo da Descoberta");
-        System.out.println("2 - Caça-Palavras");
-        System.out.print("Opção: ");
+        System.out.println("== Escolha o jogo: ==");
+        System.out.println("== 1 - Jogo da Descoberta ==");
+        System.out.println("== 2 - Caça-Palavras ==");
+        System.out.print("== Opção: ");
 
         int opcao = scanner.nextInt(); // Lê a opção escolhida
         scanner.nextLine(); // Limpa o Enter deixado pelo nextInt

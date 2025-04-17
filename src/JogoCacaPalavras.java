@@ -17,15 +17,15 @@ public class JogoCacaPalavras {
     }
 
     public void iniciar() {
-        String palavraSelecionada = selecionarPalavra(palavras);
+        String palavraSelecionada = escolherPalavra(palavras);
         colocarPalavra(tabuleiro, tamanho, palavraSelecionada);
         preencherTabuleiro(tabuleiro, tamanho);
         imprimirTabuleiro(tabuleiro, tamanho);
         verificarPalavra(palavraSelecionada);
     }
 
-    private static String selecionarPalavra(String vetor[]) {
-        return  vetor[new Random().nextInt(vetor.length)];
+    private static String escolherPalavra(String palavras[]) {
+        return  palavras[new Random().nextInt(palavras.length)];
     }
 
 
