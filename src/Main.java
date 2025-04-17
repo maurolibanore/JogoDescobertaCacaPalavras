@@ -5,7 +5,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Vetor com palavras que podem ser usadas nos jogos
-        String[] palavras = {"agua", "peixe", "mauro", "frank"};
+        String[] palavras = {"agua", "peixe", "mauro", "frank, java"};
 
 
         // Exibe o menu de escolha do jogo

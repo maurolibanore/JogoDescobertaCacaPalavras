@@ -107,23 +107,42 @@ public class JogoCacaPalavras {
         }
     }
 
-    private static void verificarPalavra(String palavraSelecionada){
-        Scanner scanner = new Scanner(System.in);
+    private void verificarPalavra(String palavraSelecionada) {
+        String opcao = lerPalavra(scanner);  // Usa o método separado
 
-        System.out.print("Qual a palavra: ");
-        String opcao = scanner.nextLine();
+        while (!opcao.equalsIgnoreCase(palavraSelecionada)) {
+            exibirMenu(); // Mostra o menu de opções
+            int escolha = Integer.parseInt(scanner.nextLine());
 
-        while (!opcao.equals(palavraSelecionada)) {
-            // Se errar, mostra a dica
-            char primeiraLetra = palavraSelecionada.charAt(0);
-            char ultimaLetra = palavraSelecionada.charAt(palavraSelecionada.length() - 1);
-
-            System.out.println("Errou! Tente novamente.");
-            System.out.println("Dica: Primeira Letra: " + primeiraLetra);
-            System.out.println("Dica: Última Letra: " + ultimaLetra);
-            System.out.print("Qual a palavra: ");
-            opcao = scanner.nextLine(); // Lê novamente
+            if (escolha == 1) {
+                opcao = lerPalavra(scanner); // Tenta novamente
+            } else if (escolha == 2) {
+                mostrarDica(palavraSelecionada); // Mostra dica
+                opcao = lerPalavra(scanner);
+            } else {
+                System.out.println("Opção inválida!");
+            }
         }
+
         System.out.println("ACERTOU!");
     }
+    private String lerPalavra(Scanner scanner) {
+        System.out.print("Qual a palavra: ");
+        return scanner.nextLine();
+    }
+
+    private void exibirMenu() {
+        System.out.println("\nErrou! Escolha uma opção:");
+        System.out.println("1 - Tentar novamente");
+        System.out.println("2 - Pedir dica");
+        System.out.print("Opção: ");
+    }
+
+    private void mostrarDica(String palavra) {
+        char primeiraLetra = palavra.charAt(0);
+        char ultimaLetra = palavra.charAt(palavra.length() - 1);
+        System.out.println("Dica: Primeira Letra: " + primeiraLetra);
+        System.out.println("Dica: Última Letra: " + ultimaLetra);
+    }
+
 }
