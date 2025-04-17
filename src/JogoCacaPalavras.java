@@ -8,7 +8,7 @@ public class JogoCacaPalavras {
     private Random random;
     private Scanner scanner;
 
-    // Construtor
+    // construtor
     public JogoCacaPalavras(String[] palavras, int tamanho) {
         this.random = new Random();
         this.scanner = new Scanner(System.in);
@@ -17,132 +17,106 @@ public class JogoCacaPalavras {
     }
 
     public void iniciar() {
-        String palavraSelecionada = escolherPalavra(palavras);
-        colocarPalavra(tabuleiro, tamanho, palavraSelecionada);
-        preencherTabuleiro(tabuleiro, tamanho);
-        imprimirTabuleiro(tabuleiro, tamanho);
+        String palavraSelecionada = palavras[random.nextInt(palavras.length)];
+        colocarPalavra(palavraSelecionada);
+        preencherTabuleiro();
+        imprimirTabuleiro();
         verificarPalavra(palavraSelecionada);
     }
 
-    private static String escolherPalavra(String palavras[]) {
-        return  palavras[new Random().nextInt(palavras.length)];
-    }
-
-
-    private static void preencherTabuleiro(char tabuleiro[][], int tamanho) {
-        Random random = new Random();
-        for (int x = 0; x < tamanho; x++) {
-            for (int y = 0; y < tamanho; y++) {
-                if (tabuleiro[x][y] == 0) { // Só preenche se estiver vazio
-                    tabuleiro[x][y] = (char) ('a' + random.nextInt(26)); // letras de a até z da tabela ASSCI
-                }
-            }
-        }
-    }
-
-    private static void colocarPalavra(char[][] tabuleiro, int tamanho, String palavraSelecionada) {
-        Random random = new Random();
+    private void colocarPalavra(String palavra) {
         boolean colocada = false;
         while (!colocada) {
+            int direcao = random.nextInt(3);
+            int linha = 0, coluna = 0;
 
-            int direcao = random.nextInt(3);// 0 = horizontal, 1 = vertical, 2 = diagonal
-
-            int linha = 0;
-            int coluna = 0;
-
-            if (direcao == 0) { // Horizontal
+            if (direcao == 0) {
                 linha = random.nextInt(tamanho);
-                coluna = random.nextInt(tamanho - palavraSelecionada.length());
-            } else if (direcao == 1) { // Vertical
-                linha = random.nextInt(tamanho - palavraSelecionada.length());
+                coluna = random.nextInt(tamanho - palavra.length());
+            } else if (direcao == 1) {
+                linha = random.nextInt(tamanho - palavra.length());
                 coluna = random.nextInt(tamanho);
-            } else { // Diagonal
-                linha = random.nextInt(tamanho - palavraSelecionada.length());
-                coluna = random.nextInt(tamanho - palavraSelecionada.length());
+            } else {
+                linha = random.nextInt(tamanho - palavra.length());
+                coluna = random.nextInt(tamanho - palavra.length());
             }
 
-            // Inicializa uma variável para verificar se a palavra pode ser colocada na posição sorteada
             boolean podeColocar = true;
-
-            for (int i = 0; i < palavraSelecionada.length(); i++) {
+            for (int i = 0; i < palavra.length(); i++) {
                 int l = linha;
                 int c = coluna;
 
-                if (direcao == 0) { // horizontal
+                if (direcao == 0) { // Horizontal
                     c += i;
-                } else if (direcao == 1) { // vertical
+                } else if (direcao == 1) { // Vertical
                     l += i;
-                } else if (direcao == 2) { // diagonal
+                } else { // Diagonal
                     l += i;
                     c += i;
                 }
-
-                // Verifica se o espaço já está ocupado por outra letra diferente
-                // Se estiver ocupado com uma letra diferente, não pode colocar a palavra aqui
-                if (tabuleiro[l][c] != 0 && tabuleiro[l][c] != palavraSelecionada.charAt(i)) {
+                if (tabuleiro[l][c] != 0 && tabuleiro[l][c] != palavra.charAt(i)) {
                     podeColocar = false;
                     break;
                 }
             }
 
             if (podeColocar) {
-                // Laço novamente para realmente colocar as letras da palavra no tabuleiro
-                for (int i = 0; i < palavraSelecionada.length(); i++) {
-                    int l = linha + (direcao == 1 || direcao == 2 ? i : 0);// Calcula a linha onde a letra será posicionada
-                    int c = coluna + (direcao == 0 || direcao == 2 ? i : 0);// Calcula a coluna onde a letra será posicionada
-                    tabuleiro[l][c] = palavraSelecionada.charAt(i);// Coloca a letra da palavra no tabuleiro na posição calculada
+                for (int i = 0; i < palavra.length(); i++) {
+                    int l = linha;
+                    int c = coluna;
+
+                    if (direcao == 0) { // Horizontal
+                        c += i;
+                    } else if (direcao == 1) { // Vertical
+                        l += i;
+                    } else if (direcao == 2) { // Diagonal
+                        l += i;
+                        c += i;
+                    }
+                    tabuleiro[l][c] = palavra.charAt(i);
                 }
                 colocada = true;
             }
         }
     }
 
-    private static void imprimirTabuleiro(char tabuleiro[][], int tamanho) {  // cria uma classe privada para melhor organizacao
+    private void preencherTabuleiro() {
+        for (int x = 0; x < tamanho; x++) {
+            for (int y = 0; y < tamanho; y++) {
+                if (tabuleiro[x][y] == 0) {
+                    tabuleiro[x][y] = (char) ('a' + random.nextInt(26));
+                }
+            }
+        }
+    }
+
+    private void imprimirTabuleiro() {
         System.out.println("==== CAÇA PALAVRAS ====");
         for (int x = 0; x < tamanho; x++) {
             for (int y = 0; y < tamanho; y++) {
                 System.out.print(tabuleiro[x][y] + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
     private void verificarPalavra(String palavraSelecionada) {
-        String opcao = lerPalavra(scanner);  // Usa o método separado
+        String tentativa = UtilJogo.lerPalavra(scanner);
 
-        while (!opcao.equalsIgnoreCase(palavraSelecionada)) {
-            exibirMenu(); // Mostra o menu de opções
-            int escolha = Integer.parseInt(scanner.nextLine());
+        while (!tentativa.equalsIgnoreCase(palavraSelecionada)) {
+            UtilJogo.exibirMenu();
+            String escolha = scanner.nextLine();
 
-            if (escolha == 1) {
-                opcao = lerPalavra(scanner); // Tenta novamente
-            } else if (escolha == 2) {
-                mostrarDica(palavraSelecionada); // Mostra dica
-                opcao = lerPalavra(scanner);
+            if (escolha.equals("1")) {
+                tentativa = UtilJogo.lerPalavra(scanner);
+            } else if (escolha.equals("2")) {
+                UtilJogo.mostrarDica(palavraSelecionada);
+                tentativa = UtilJogo.lerPalavra(scanner);
             } else {
-                System.out.println("Opção inválida!");
+                System.out.println("Opção inválida.");
             }
         }
 
         System.out.println("ACERTOU!");
     }
-    private String lerPalavra(Scanner scanner) {
-        System.out.print("Qual a palavra: ");
-        return scanner.nextLine();
-    }
-
-    private void exibirMenu() {
-        System.out.println("\nErrou! Escolha uma opção:");
-        System.out.println("1 - Tentar novamente");
-        System.out.println("2 - Pedir dica");
-        System.out.print("Opção: ");
-    }
-
-    private void mostrarDica(String palavra) {
-        char primeiraLetra = palavra.charAt(0);
-        char ultimaLetra = palavra.charAt(palavra.length() - 1);
-        System.out.println("Dica: Primeira Letra: " + primeiraLetra);
-        System.out.println("Dica: Última Letra: " + ultimaLetra);
-    }
-
 }
