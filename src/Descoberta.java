@@ -5,7 +5,7 @@ public class Descoberta {
     private Scanner scanner;
     private Random random;
     private String[] palavras;
-    private String palavraEscolhida;
+    private String palavraSelecionada;
     private String palavraEmbaralhada;
     private int contador;
 
@@ -14,8 +14,8 @@ public class Descoberta {
         this.palavras = palavras;
         this.random = new Random();
         this.scanner = new Scanner(System.in);
-        this.palavraEscolhida = palavras[random.nextInt(palavras.length)];
-        this.palavraEmbaralhada = embaralharPalavra(palavraEscolhida);
+        this.palavraSelecionada = palavras[random.nextInt(palavras.length)];
+        this.palavraEmbaralhada = embaralharPalavra(palavraSelecionada);
     }
 
     private String embaralharPalavra(String palavra) {
@@ -33,15 +33,15 @@ public class Descoberta {
         System.out.println("Palavra embaralhada: " + palavraEmbaralhada);
         String tentativa = UtilJogo.lerPalavra(scanner);
 
-        while (!tentativa.equalsIgnoreCase(palavraEscolhida)) {  // ignore case para ignorar maiusc ou min
-            UtilJogo.exibirMenu();
+        while (!tentativa.equalsIgnoreCase(palavraSelecionada)) {  // ignore case para ignorar maiusc ou min
+            UtilJogo.exibirMenuErro();
             String escolha = scanner.nextLine();
 
             if (escolha.equals("1")) {
                 tentativa = UtilJogo.lerPalavra(scanner);
                 contador++;
             } else if (escolha.equals("2")) {
-                UtilJogo.mostrarDica(palavraEscolhida);
+                UtilJogo.mostrarDica(palavraSelecionada);
                 tentativa = UtilJogo.lerPalavra(scanner);
                 contador++;
             } else {

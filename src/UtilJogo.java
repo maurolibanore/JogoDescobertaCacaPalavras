@@ -6,8 +6,8 @@ public class UtilJogo {
         return scanner.nextLine();
     }
 
-    public static void exibirMenu() {
-        System.out.println("\nErrou! Escolha uma opção:");
+    public static void exibirMenuErro() {
+        System.out.println("Errou! Escolha uma opção:");
         System.out.println("1 - Tentar novamente");
         System.out.println("2 - Pedir dica");
         System.out.print("Opção: ");

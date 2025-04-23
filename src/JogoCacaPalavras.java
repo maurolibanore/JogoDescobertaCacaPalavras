@@ -104,7 +104,7 @@ public class JogoCacaPalavras {
         String tentativa = UtilJogo.lerPalavra(scanner);
 
         while (!tentativa.equalsIgnoreCase(palavraSelecionada)) {
-            UtilJogo.exibirMenu();
+            UtilJogo.exibirMenuErro();
             String escolha = scanner.nextLine();
 
             if (escolha.equals("1")) {
