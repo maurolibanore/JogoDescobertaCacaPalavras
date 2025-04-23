@@ -12,8 +12,8 @@ public class Descoberta {
     // construtor
     public Descoberta(String[] palavras) {
         this.palavras = palavras;
-        this.random = new Random();
-        this.scanner = new Scanner(System.in);
+        random = new Random();
+        scanner = new Scanner(System.in);
         this.palavraSelecionada = palavras[random.nextInt(palavras.length)];
         this.palavraEmbaralhada = embaralharPalavra(palavraSelecionada);
     }

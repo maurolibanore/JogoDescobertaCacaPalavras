@@ -10,9 +10,9 @@ public class JogoCacaPalavras {
 
     // construtor
     public JogoCacaPalavras(String[] palavras, int tamanho) {
-        this.random = new Random();
-        this.scanner = new Scanner(System.in);
         this.palavras = palavras;
+        random = new Random();
+        scanner = new Scanner(System.in);
         this.tabuleiro = new char[tamanho][tamanho];
     }
 

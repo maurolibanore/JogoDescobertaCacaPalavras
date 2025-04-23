@@ -6,7 +6,6 @@ public class Main {
 
         String[] palavras = {"agua", "peixe", "mauro", "frank", "java"};
 
-
         boolean jogarNovamente = true;
         while (jogarNovamente) {
             // Exibe o menu de escolha do jogo
@@ -37,6 +36,6 @@ public class Main {
             }
         }
 
-        System.out.println("Obrigado por jogar!");
+        System.out.println("Fim de Jogo!");
     }
 }
