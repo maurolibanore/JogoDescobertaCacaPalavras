@@ -31,7 +31,7 @@ public class Main {
 
             System.out.print("Você deseja jogar novamente? (s/n): ");
             String resposta = scanner.nextLine();
-            if (resposta == "n") {
+            if (resposta.equalsIgnoreCase("n")) {
                 jogarNovamente = false;
             }
         }
