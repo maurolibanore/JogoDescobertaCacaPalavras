@@ -1,16 +1,33 @@
 import java.util.Scanner;
 
 public class UtilJogo {
-    private static String[] palavras = {"agua", "peixe", "mauro", "frank", "java"};
+    Scanner scanner = new Scanner(System.in);
 
+    public static void verificarPalavra(String palavraSelecionada, Scanner scanner) {
+        int contador = 0;
+        System.out.print("Digite a palavra: ");
+        String tentativa = scanner.nextLine();
 
-    public static String[] getPalavras() {
-        return palavras;
-    }
+        while (!tentativa.equalsIgnoreCase(palavraSelecionada)) {
+            UtilJogo.exibirMenuErro();
+            String escolha = scanner.nextLine();
 
-    public static String lerPalavra(Scanner scanner) {
-        System.out.print("Qual a palavra: ");
-        return scanner.nextLine();
+            if (escolha.equals("1")) {
+                System.out.print("Digite a palavra novamente: ");
+                tentativa = scanner.nextLine();
+                contador ++;
+            } else if (escolha.equals("2")) {
+                UtilJogo.mostrarDica(palavraSelecionada);
+                System.out.print("Digite a palavra novamente: ");
+                tentativa = scanner.nextLine();
+                contador ++;
+            } else {
+                System.out.println("Opção inválida.");
+            }
+        }
+
+        System.out.println("ACERTOU!");
+        System.out.println("Quantidade de erros: "+ contador);
     }
 
     public static void exibirMenuErro() {

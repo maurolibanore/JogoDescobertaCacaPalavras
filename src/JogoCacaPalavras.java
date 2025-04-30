@@ -2,82 +2,38 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class JogoCacaPalavras {
-    private String[] palavras;
     private int tamanho = 10;
     private char[][] tabuleiro;
     private Random random;
     private Scanner scanner;
+    private Palavras palavras;
+    private String palavraSelecionada;
+
 
     // construtor
     public JogoCacaPalavras(String[] palavras, int tamanho) {
-        this.palavras = palavras;
         random = new Random();
         scanner = new Scanner(System.in);
+        this.palavras = new Palavras();
         this.tabuleiro = new char[tamanho][tamanho];
     }
 
+
     public void iniciar() {
-        String palavraSelecionada = palavras[random.nextInt(palavras.length)];
+        this.palavraSelecionada = palavras.getPalavraSelecionada();
         colocarPalavra(palavraSelecionada);
         preencherTabuleiro();
         imprimirTabuleiro();
-        verificarPalavra(palavraSelecionada);
+        UtilJogo.verificarPalavra(palavraSelecionada, scanner);
     }
 
-    private void colocarPalavra(String palavra) {
-        boolean colocada = false;
-        while (!colocada) {
-            int direcao = random.nextInt(3);
-            int linha = 0, coluna = 0;
+    private void colocarPalavra(String palavraSelecionada) {
+        Random random = new Random();
+        int linha = random.nextInt(tamanho);
+        int coluna = random.nextInt(tamanho - palavraSelecionada.length());  // para nao dar divergencia no final da coluna
 
-            if (direcao == 0) {
-                linha = random.nextInt(tamanho);
-                coluna = random.nextInt(tamanho - palavra.length());
-            } else if (direcao == 1) {
-                linha = random.nextInt(tamanho - palavra.length());
-                coluna = random.nextInt(tamanho);
-            } else {
-                linha = random.nextInt(tamanho - palavra.length());
-                coluna = random.nextInt(tamanho - palavra.length());
-            }
-
-            boolean podeColocar = true;
-            for (int i = 0; i < palavra.length(); i++) {
-                int l = linha;
-                int c = coluna;
-
-                if (direcao == 0) { // Horizontal
-                    c += i;
-                } else if (direcao == 1) { // Vertical
-                    l += i;
-                } else { // Diagonal
-                    l += i;
-                    c += i;
-                }
-                if (tabuleiro[l][c] != 0 && tabuleiro[l][c] != palavra.charAt(i)) {
-                    podeColocar = false;
-                    break;
-                }
-            }
-
-            if (podeColocar) {
-                for (int i = 0; i < palavra.length(); i++) {
-                    int l = linha;
-                    int c = coluna;
-
-                    if (direcao == 0) { // Horizontal
-                        c += i;
-                    } else if (direcao == 1) { // Vertical
-                        l += i;
-                    } else if (direcao == 2) { // Diagonal
-                        l += i;
-                        c += i;
-                    }
-                    tabuleiro[l][c] = palavra.charAt(i);
-                }
-                colocada = true;
-            }
-        }
+        for (int x = 0; x <palavraSelecionada.length(); x++)
+            tabuleiro[linha][coluna + x] = palavraSelecionada.charAt(x);  // CHATAT pega o char por palavra ex mauro chatat 0 = m
     }
 
     private void preencherTabuleiro() {
@@ -100,23 +56,6 @@ public class JogoCacaPalavras {
         }
     }
 
-    private void verificarPalavra(String palavraSelecionada) {
-        String tentativa = UtilJogo.lerPalavra(scanner);
 
-        while (!tentativa.equalsIgnoreCase(palavraSelecionada)) {
-            UtilJogo.exibirMenuErro();
-            String escolha = scanner.nextLine();
 
-            if (escolha.equals("1")) {
-                tentativa = UtilJogo.lerPalavra(scanner);
-            } else if (escolha.equals("2")) {
-                UtilJogo.mostrarDica(palavraSelecionada);
-                tentativa = UtilJogo.lerPalavra(scanner);
-            } else {
-                System.out.println("Opção inválida.");
-            }
-        }
-
-        System.out.println("ACERTOU!");
-    }
 }

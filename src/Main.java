@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] palavras = UtilJogo.getPalavras();
+        String[] palavras = Palavras.getPalavras();
 
         boolean jogarNovamente = true;
         while (jogarNovamente) {
