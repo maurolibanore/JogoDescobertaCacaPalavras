@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class UtilJogo {
+    private static String[] palavras = {"agua", "peixe", "mauro", "frank", "java"};
+
+
+    public static String[] getPalavras() {
+        return palavras;
+    }
+
     public static String lerPalavra(Scanner scanner) {
         System.out.print("Qual a palavra: ");
         return scanner.nextLine();

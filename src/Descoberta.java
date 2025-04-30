@@ -7,7 +7,7 @@ public class Descoberta {
     private String[] palavras;
     private String palavraSelecionada;
     private String palavraEmbaralhada;
-    private int contador;
+    protected int contador;
 
     // construtor
     public Descoberta(String[] palavras) {
