@@ -12,7 +12,7 @@ public class Palavras {
     }
 
     private String selecionarPalavra(){
-        return palavras[random.nextInt(palavras.length)];
+        return palavras[random.nextInt(palavras.length)];      // ATRIBUO DIRETO NO CONSTRUTOR PELO VOID
     }
 
     private String embaralharPalavra(String palavra){

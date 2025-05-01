@@ -7,14 +7,15 @@ public class JogoCacaPalavras {
     private Scanner scanner;
     private Palavras palavras;
     private String palavraSelecionada;
+    private int tamanho;
 
 
     // construtor
-    public JogoCacaPalavras(String[] palavras, int tamanhoTabuleiro) {
+    public JogoCacaPalavras(String[] palavras) {
         random = new Random();
         scanner = new Scanner(System.in);
         this.palavras = new Palavras();
-        int tamanho = UtilJogo.getTamanhoTabuleiro();
+        this.tamanho = UtilJogo.getTamanhoTabuleiro();
         this.tabuleiro = new char[tamanho][tamanho];
     }
 
@@ -28,7 +29,6 @@ public class JogoCacaPalavras {
     }
 
     private void colocarPalavra(String palavraSelecionada) {
-        int tamanho = UtilJogo.getTamanhoTabuleiro();
         Random random = new Random();
 
         int linha = random.nextInt(tamanho);

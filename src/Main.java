@@ -10,8 +10,8 @@ public class Main {
         while (jogarNovamente) {
             // Exibe o menu de escolha do jogo
             System.out.println("== Escolha o jogo: ==");
-            System.out.println("== 1 - Jogo da Descoberta ==");
-            System.out.println("== 2 - Caça-Palavras ==");
+            System.out.println("== [1] - Jogo da Descoberta ==");
+            System.out.println("== [2] - Caça-Palavras ==");
             System.out.print("== Opção: ");
 
             int opcao = scanner.nextInt();
@@ -22,7 +22,7 @@ public class Main {
                 JogoDescoberta descoberta = new JogoDescoberta(palavras);
                 descoberta.iniciar();
             } else if (opcao == 2) {
-                JogoCacaPalavras cacaPalavras = new JogoCacaPalavras(palavras, UtilJogo.getTamanhoTabuleiro());
+                JogoCacaPalavras cacaPalavras = new JogoCacaPalavras(palavras);
                 cacaPalavras.iniciar();
             } else {
                 System.out.println("Opção inválida! Tente novamente.");
