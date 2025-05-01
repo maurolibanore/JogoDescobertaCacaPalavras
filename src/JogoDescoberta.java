@@ -1,14 +1,14 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Descoberta {
+public class JogoDescoberta {
     private Scanner scanner;
     private Random random;
     private Palavras palavras;
     protected int contador;
 
     // construtor
-    public Descoberta(String[] palavras) {
+    public JogoDescoberta(String[] palavras) {
         random = new Random();
         scanner = new Scanner(System.in);
         this.palavras = new Palavras();

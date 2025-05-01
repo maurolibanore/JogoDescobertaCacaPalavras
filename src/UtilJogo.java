@@ -2,6 +2,11 @@ import java.util.Scanner;
 
 public class UtilJogo {
     Scanner scanner = new Scanner(System.in);
+    private static int tamanho = 10;
+
+    public static int getTamanhoTabuleiro() {
+        return tamanho;
+    }
 
     public static void verificarPalavra(String palavraSelecionada, Scanner scanner) {
         int contador = 0;

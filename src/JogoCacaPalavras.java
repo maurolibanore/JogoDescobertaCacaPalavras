@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class JogoCacaPalavras {
-    private int tamanho = 10;
     private char[][] tabuleiro;
     private Random random;
     private Scanner scanner;
@@ -11,10 +10,11 @@ public class JogoCacaPalavras {
 
 
     // construtor
-    public JogoCacaPalavras(String[] palavras, int tamanho) {
+    public JogoCacaPalavras(String[] palavras, int tamanhoTabuleiro) {
         random = new Random();
         scanner = new Scanner(System.in);
         this.palavras = new Palavras();
+        int tamanho = UtilJogo.getTamanhoTabuleiro();
         this.tabuleiro = new char[tamanho][tamanho];
     }
 
@@ -28,7 +28,9 @@ public class JogoCacaPalavras {
     }
 
     private void colocarPalavra(String palavraSelecionada) {
+        int tamanho = UtilJogo.getTamanhoTabuleiro();
         Random random = new Random();
+
         int linha = random.nextInt(tamanho);
         int coluna = random.nextInt(tamanho - palavraSelecionada.length());  // para nao dar divergencia no final da coluna
 
@@ -37,6 +39,7 @@ public class JogoCacaPalavras {
     }
 
     private void preencherTabuleiro() {
+        int tamanho = UtilJogo.getTamanhoTabuleiro();
         for (int x = 0; x < tamanho; x++) {
             for (int y = 0; y < tamanho; y++) {
                 if (tabuleiro[x][y] == 0) {
@@ -47,6 +50,7 @@ public class JogoCacaPalavras {
     }
 
     private void imprimirTabuleiro() {
+        int tamanho = UtilJogo.getTamanhoTabuleiro();
         System.out.println("==== CAÇA PALAVRAS ====");
         for (int x = 0; x < tamanho; x++) {
             for (int y = 0; y < tamanho; y++) {

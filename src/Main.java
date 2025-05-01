@@ -19,10 +19,10 @@ public class Main {
 
 
             if (opcao == 1) {
-                Descoberta descoberta = new Descoberta(palavras);
+                JogoDescoberta descoberta = new JogoDescoberta(palavras);
                 descoberta.iniciar();
             } else if (opcao == 2) {
-                JogoCacaPalavras cacaPalavras = new JogoCacaPalavras(palavras, 10);
+                JogoCacaPalavras cacaPalavras = new JogoCacaPalavras(palavras, UtilJogo.getTamanhoTabuleiro());
                 cacaPalavras.iniciar();
             } else {
                 System.out.println("Opção inválida! Tente novamente.");
